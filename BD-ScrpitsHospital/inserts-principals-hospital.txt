@@ -5,7 +5,7 @@
 -- on farem els inserts seguents  sino no funcionara res
 -- fer delete from x where x de totes les taules
 
---inserts taules master
+-- inserts taules master
 
 insert into categoria (nom ,estat) values ('Infermeria' , 'actiu') , ('TCAI', 'actiu');
 insert into torn (nom ,estat) values ('Dia', 'actiu') , ('Nit', 'actiu');

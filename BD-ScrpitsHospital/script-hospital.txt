@@ -58,9 +58,9 @@ create table if not exists guardies(
 
 create table if not exists treballador (
 	dni 				varchar(10)		primary key,
+    password 			varchar(55)			not null,
     nom					varchar(55)		not null,
     data_naixement		DATE			not null,
-    password			varchar(55)		not null,
     categoria			varchar(15)		not null,
     rol 				varchar(15)		not null,
     estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
