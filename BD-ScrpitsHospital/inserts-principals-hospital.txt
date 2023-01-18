@@ -1,0 +1,86 @@
+
+
+
+-- abans d'executar aixo s'ha de borrar tot el que tingis a la les taules
+-- on farem els inserts seguents  sino no funcionara res
+-- fer delete from x where x de totes les taules
+
+--inserts taules master
+
+insert into categoria (nom ,estat) values ('Infermeria' , 'actiu') , ('TCAI', 'actiu');
+insert into torn (nom ,estat) values ('Dia', 'actiu') , ('Nit', 'actiu');
+insert into unitat (nom , estat) values ('Unitat 1', 'actiu') , ('Unitat 2', 'actiu') , ('Unitat 3', 'actiu') , ('Unitat 4', 'actiu') , ('Urgencies', 'actiu');
+
+-- inserts plantilla guardia
+
+-- ------------------------- UNITAT 1 ---------------
+insert into plantilla_guardia (unitat , categoria , torn , places, estat ) 
+values ('Unitat 1' , 'Infermeria' , 'Dia' , 1 , 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 1' , 'TCAI' , 'Dia' , 5, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 1' , 'Infermeria' , 'Nit' , 1, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 1' , 'TCAI' , 'Nit' , 2, 'actiu') ;
+
+
+-- ----------------- UNITAT 2--------------
+
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 2' , 'Infermeria' , 'Dia' , 0, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 2' , 'TCAI' , 'Dia' , 0, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 2' , 'Infermeria' , 'Nit' , 0, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 2' , 'TCAI' , 'Nit' , 0, 'actiu') ;
+
+
+-- ------------------------- UNITAT 3 -------------
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 3' , 'Infermeria' , 'Dia' , 2, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 3' , 'TCAI' , 'Dia' , 2, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 3' , 'Infermeria' , 'Nit' , 2, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 3' , 'TCAI' , 'Nit' , 2, 'actiu') ;
+
+
+-- ---------------------------- UNITAT 4 ---------------
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 4' , 'Infermeria' , 'Dia' , 2, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 4' , 'TCAI' , 'Dia' , 2, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 4' , 'Infermeria' , 'Nit' , 1, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Unitat 4' , 'TCAI' , 'Nit' , 1, 'actiu') ;
+
+-- ----------------------------- UNITAT 5 -----------------
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Urgencies' , 'Infermeria' , 'Dia' , 4, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Urgencies' , 'TCAI' , 'Dia' , 1, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Urgencies' , 'Infermeria' , 'Nit' , 3, 'actiu') ;
+
+insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
+values ('Urgencies' , 'TCAI' , 'Nit' , 1, 'actiu') ;

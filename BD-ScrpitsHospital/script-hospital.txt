@@ -1,0 +1,92 @@
+
+drop table if exists plantilla_guardia;
+drop table if exists guardies;
+drop table if exists guardies_x_treballador;
+drop table if exists treballador;
+drop table if exists historial;
+drop table if exists unitat;
+drop table if exists torn;
+drop table if exists categoria;
+drop table if exists festius;
+
+create table if not exists unitat(
+    nom					varchar(20)		primary key,
+    estat 				varchar(15)		check (estat in ('actiu' , 'eliminat'))
+);
+
+create table if not exists torn (
+    nom 				varchar(15)		primary KEY,
+    estat 				varchar(15)		check (estat in ('actiu' , 'eliminat'))
+);
+
+create table if not exists categoria(
+    nom					varchar(15)		primary key,
+    estat 				varchar(15)		check (estat in ('actiu' , 'eliminat'))
+);
+
+create table if not exists festius (
+	dia 				DATE			primary key,
+    estat				varchar(15)		check (estat in ('actiu' , 'eliminat'))
+);
+
+create table if not exists plantilla_guardia(
+	unitat				varchar(20)		not null,
+    torn				varchar(15)		not null,
+    categoria			varchar(15)		not null,
+    places				int(10)		not null,
+    estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
+    foreign key (unitat) references unitat(nom),
+    foreign key (torn) references torn(nom),
+    foreign key (categoria) references categoria(nom)
+);
+
+create table if not exists guardies(
+	
+    id					int(100)		primary key auto_increment,
+    data_guardia		DATE			not null,
+    unitat 				varchar(20)		not null,
+    torn				varchar(15)		not null,
+    categoria			varchar(15)		not null,
+    estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
+    foreign key (unitat) references unitat(nom),
+    foreign key (torn) references torn(nom),
+    foreign key (categoria) references categoria(nom)
+);
+
+
+
+
+create table if not exists treballador (
+	dni 				varchar(10)		primary key,
+    nom					varchar(55)		not null,
+    data_naixement		DATE			not null,
+    password			varchar(55)		not null,
+    categoria			varchar(15)		not null,
+    rol 				varchar(15)		not null,
+    estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
+    foreign key (categoria) references categoria(nom)
+);
+
+
+create table if not exists guardies_x_treballador (
+	id					int(100)		primary key auto_increment,
+    dni_treballador		varchar(10)		not null,
+    id_guardia			int(100)		not null,
+    data_guardia		date			not null,
+    estat_guardia		varchar(20)		not null,
+    estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
+    foreign key (dni_treballador) references treballador(dni)
+);
+
+create table if not exists historial (
+    id					int(100)		primary key auto_increment,
+    data_canvi			date			not null,
+    estat_anterior		varchar(250)	not null,
+    estat_actual		varchar(250)	not null,
+    usuari				varchar(55)		not null
+);
+
+alter table guardies auto_increment = 1;
+alter table guardies_x_treballador auto_increment = 1;
+alter table historial auto_increment = 1;
+
