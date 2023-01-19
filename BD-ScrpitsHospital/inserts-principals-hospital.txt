@@ -84,3 +84,22 @@ values ('Urgencies' , 'Infermeria' , 'Nit' , 3, 'actiu') ;
 
 insert into plantilla_guardia (unitat , categoria , torn , places, estat) 
 values ('Urgencies' , 'TCAI' , 'Nit' , 1, 'actiu') ;
+
+
+-- ---------------------------- FESTIUS ----------------------
+
+insert into festius values ('2023/01/06' , 'actiu');
+insert into festius values ('2023/04/07' , 'actiu');
+insert into festius values ('2023/04/10' , 'actiu');
+insert into festius values ('2023/05/01' , 'actiu');
+insert into festius values ('2023/06/26' , 'actiu');
+insert into festius values ('2023/08/15' , 'actiu');
+insert into festius values ('2023/09/11' , 'actiu');
+
+-- --------------------------- TREBALLADORS -----------------
+
+insert into treballador values ('111111111A' , 'secret' , 'Oussama' ,'2001/09/26' , 'Infermeria' , 'ADMIN' , 'actiu');
+insert into treballador values ('111111111B' , 'secret' , 'Marc' ,'2001/01/20' , 'Infermeria' , 'ADMIN' , 'actiu');
+insert into treballador values ('111111111C' , 'secret' , 'Liu' ,'2001/05/20' , 'Infermeria' , 'ADMIN' , 'actiu');
+insert into treballador values ('111111111D' , 'secret' , 'Eric' ,'2001/04/20' , 'Infermeria' , 'ADMIN' , 'actiu');
+insert into treballador values ('111111111E' , 'secret' , 'Prova' ,'2001/04/20' , 'TCAI' , 'USER' , 'actiu');
