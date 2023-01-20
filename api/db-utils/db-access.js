@@ -4,7 +4,7 @@ const connection = require('./db-connection.js')
 
 const getPlantilla = (async (req, res) => {
 
-    connection.query("select * from plantilla_guardia where unitat = 'Unitat 1' and torn = 'Dia';",
+    connection.query("select * from plantilla_guardia where unitat = 'Unitat 1' and torn = 'Dia' and estat = 'actiu';",
         (err, result) => {
             if (err) {
                 res.status(400).send("Error al obtenir plantilla guardia");
@@ -20,7 +20,7 @@ const getPlantilla = (async (req, res) => {
 
 const getTreballadors = (async (req, res) => {
     
-    connection.query('select * from treballador', (err, result) => {
+    connection.query("select * from treballador where estat = 'actiu' " , (err, result) => {
         if (err) {
             res.status(400).send('Error al obtenir treballdors')
         }
