@@ -7,6 +7,7 @@ const userController = require('../controllers/user.js')
 
 router.get('/plantillaGuardia', db_access.getPlantilla) 
 router.get('/treballadors' , db_access.getTreballadors)
+router.get('/categories' , db_access.getCategories)
 
 
 

@@ -30,12 +30,22 @@ const getTreballadors = (async (req, res) => {
             "resultat": { "dades": result }
         })
     })
-
-
 })
 
+const getCategories = (async (req, res) => {
+    connection.query("select nom from categoria where estat = 'actiu'", (err, result) => {
+        if (err) {
+            res.status(400).send('Error al obternir categoria')
+        }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
+        res.status(200).send({
+            "resultat": { "dades": result }
+        });
+    })
+});
 
 
 
-module.exports = { getPlantilla, getTreballadors };
+module.exports = { getPlantilla, getTreballadors, getCategories };
 
