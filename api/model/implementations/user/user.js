@@ -9,6 +9,10 @@ class User {
         this.name = name;
         this.password = password;
     }
+
+    setRol(rol){
+        this.rol = rol;
+    }
 }
 
 module.exports = User;
