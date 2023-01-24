@@ -57,13 +57,47 @@ const getCategories = (async (req, res) => {
     })
 });
 
+const getTorns = (async (req, res) => {
+    connection.query("select nom from torn where estat = 'actiu'", (err, result) => {
+        if (err) {
+            res.status(400).send('Error al obternir categoria')
+        }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
+        res.status(200).send({
+            "resultat": { "dades": result }
+        });
+    })
+});
+
 const getGuardiesTreballador = (async (req, res) => {
     const DADES_GuardiesTreballador = 'gx.id, gx.estat_guardia, gx.estat';
     const DADES_Guardia = ',g.id, g.data_guardia, g.unitat, g.torn, g.categoria';
 
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
     const DNI = req.query.dni;
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"'";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"' order by g.data_guardia";
+    connection.query(sql, (err, result) => {
+        if (err) {
+            res.status(400).send('Error al obternir guardes per treballador')
+        }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
+        res.status(200).send({
+            "resultat": { "dades": result }
+        });
+    })
+});
+
+const getAgendaTreballador = (async (req, res) => {
+    const DADES_GuardiesTreballador = 'gx.id, gx.estat_guardia, gx.estat';
+    const DADES_Guardia = ',g.id, g.data_guardia, g.unitat, g.torn, g.categoria';
+
+    const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
+    const DNI = req.query.dni;
+    const DATA = req.query.data;
+
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"' and g.data_guardia > '"+DATA+"' order by g.data_guardia";
     connection.query(sql, (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir guardes per treballador')
@@ -78,5 +112,5 @@ const getGuardiesTreballador = (async (req, res) => {
 
 
 
-module.exports = { getPlantilla, getTreballadors, getTreballador, getCategories, getGuardiesTreballador };
+module.exports = { getPlantilla, getTreballadors, getTreballador, getCategories, getGuardiesTreballador, getAgendaTreballador, getTorns };
 
