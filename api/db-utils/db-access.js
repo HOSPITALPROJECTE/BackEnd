@@ -4,7 +4,7 @@ const connection = require('./db-connection.js')
 
 const getPlantilla = (async (req, res) => {
 
-    connection.query("select * from plantilla_guardia where unitat = 'Unitat 1' and torn = 'Dia' and estat = 'actiu';",
+    connection.query("select * from plantilla_guardia where unitat = 'Unitat 1' and torn = 'Dia' and estat != 'eliminat';",
         (err, result) => {
             if (err) {
                 res.status(400).send("Error al obtenir plantilla guardia");
@@ -32,7 +32,7 @@ const getTreballador = (async (req, res) => {
 });
 const getTreballadors = (async (req, res) => {
     
-    connection.query("select * from treballador where estat = 'actiu' " , (err, result) => {
+    connection.query("select * from treballador where estat != 'eliminat' " , (err, result) => {
         if (err) {
             res.status(400).send('Error al obtenir treballdors')
         }
@@ -45,7 +45,7 @@ const getTreballadors = (async (req, res) => {
 })
 
 const getCategories = (async (req, res) => {
-    connection.query("select nom from categoria where estat = 'actiu'", (err, result) => {
+    connection.query("select nom from categoria where estat != 'eliminat'", (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir categoria')
         }
@@ -58,7 +58,7 @@ const getCategories = (async (req, res) => {
 });
 
 const getTorns = (async (req, res) => {
-    connection.query("select nom from torn where estat = 'actiu'", (err, result) => {
+    connection.query("select nom from torn where estat != 'eliminat'", (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir categoria')
         }
@@ -71,7 +71,7 @@ const getTorns = (async (req, res) => {
 });
 
 const getUnitats = (async (req, res) => {
-    connection.query("select nom from unitat where estat = 'actiu'", (err, result) => {
+    connection.query("select nom from unitat where estat != 'eliminat'", (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir categoria')
         }
@@ -83,7 +83,7 @@ const getUnitats = (async (req, res) => {
     })
 });
 const getFestius = (async (req, res) => {
-    connection.query("select * from festius", (err, result) => {
+    connection.query("select * from festius where estat != 'eliminat'", (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir categoria')
         }
@@ -101,7 +101,7 @@ const getGuardiesTreballador = (async (req, res) => {
 
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
     const DNI = req.query.dni;
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"' order by g.data_guardia";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' order by g.data_guardia";
     connection.query(sql, (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir guardes per treballador')
@@ -122,7 +122,7 @@ const getAgendaTreballador = (async (req, res) => {
     const DNI = req.query.dni;
     const DATA = req.query.data;
 
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"' and g.data_guardia > '"+DATA+"' order by g.data_guardia";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' and g.data_guardia > '"+DATA+"' order by g.data_guardia";
     connection.query(sql, (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir guardes per treballador')
@@ -143,7 +143,7 @@ const getHistorialTreballador = (async (req, res) => {
     const DNI = req.query.dni;
     const DATA = req.query.data;
 
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"' and g.data_guardia < '"+DATA+"' order by g.unitat";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' and g.data_guardia < '"+DATA+"' order by g.unitat";
     connection.query(sql, (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir guardes per treballador')
