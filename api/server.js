@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
 const userRoutes = require('./routes/user.js');
 const dataRoutes = require('./routes/data-access.js')
