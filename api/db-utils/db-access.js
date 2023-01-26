@@ -164,13 +164,27 @@ const updateFestiu = (async (req, res) => {
     });
 });
 const insertFestiu = (async (req, res) => {
-    let sql = `INSERT into festius(dia, estat) VALUES (?, ?)`;
-    connection.query(sql,[req.body.dia,req.body.estat], (error, results, fields) => {
-      if (error) throw error;
-      res.send({"d":req.body.status});
-    });
+    try {
+        let sql = `INSERT into festius(dia, estat) VALUES (?, ?)`;
+        connection.query(sql,[req.body.dia,req.body.estat], (error, results, fields) => {
+        if (error) {
+            if(error.code === 'ER_DUP_ENTRY'){
+                let updateSql = `UPDATE festius SET estat = ? WHERE dia = ?`;
+                connection.query(updateSql, [req.body.estat, req.body.dia], (error, results) => {
+                    if (error) throw error;
+                    res.send({"message": "El valor del campo estat ha sido actualizado"});
+                });
+            } 
+            else {
+                throw error;
+            }
+        }
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ error: "Ha ocurrido un error al insertar el festiu" });
+    }
 });
-
 
 
 module.exports = { getPlantilla, getTreballadors, getTreballador, getCategories, getGuardiesTreballador, getAgendaTreballador, getTorns, getUnitats,getHistorialTreballador,getFestius,updateFestiu, insertFestiu };
