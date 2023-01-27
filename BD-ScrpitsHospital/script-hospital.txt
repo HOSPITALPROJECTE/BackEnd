@@ -33,7 +33,7 @@ create table if not exists plantilla_guardia(
 	unitat				varchar(20)		not null,
     torn				varchar(15)		not null,
     categoria			varchar(15)		not null,
-    places				int(10)		not null,
+    places				int 			not null,
     estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
     foreign key (unitat) references unitat(nom),
     foreign key (torn) references torn(nom),
@@ -42,11 +42,12 @@ create table if not exists plantilla_guardia(
 
 create table if not exists guardies(
 	
-    id					int(100)		primary key auto_increment,
+    id					int				primary key auto_increment,
     data_guardia		DATE			not null,
     unitat 				varchar(20)		not null,
     torn				varchar(15)		not null,
     categoria			varchar(15)		not null,
+    places				int				not null,
     estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
     foreign key (unitat) references unitat(nom),
     foreign key (torn) references torn(nom),
@@ -69,17 +70,16 @@ create table if not exists treballador (
 
 
 create table if not exists guardies_x_treballador (
-	id					int(100)		primary key auto_increment,
+	id					int				primary key auto_increment,
     dni_treballador		varchar(10)		not null,
     id_guardia			int(100)		not null,
-    data_guardia		date			not null,
-    estat_guardia		varchar(20)		not null,
+    estat_guardia		varchar(20)		check (estat_guardia in ('assignat', 'apuntat')),
     estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
     foreign key (dni_treballador) references treballador(dni)
 );
 
 create table if not exists historial (
-    id					int(100)		primary key auto_increment,
+    id					int				primary key auto_increment,
     data_canvi			date			not null,
     estat_anterior		varchar(250)	not null,
     estat_actual		varchar(250)	not null,
@@ -89,4 +89,11 @@ create table if not exists historial (
 alter table guardies auto_increment = 1;
 alter table guardies_x_treballador auto_increment = 1;
 alter table historial auto_increment = 1;
+
+-- --------------------------------------------- VISTES -------------------------------
+
+create view guardiesTreballadorData as 
+select gt.dni_treballador , gt.id_guardia , gt.estat_guardia , g.data_guardia 
+from guardies_x_treballador gt , guardies g 
+where gt.id_guardia = g.id
 

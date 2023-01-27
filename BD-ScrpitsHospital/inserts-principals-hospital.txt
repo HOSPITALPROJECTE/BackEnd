@@ -103,3 +103,94 @@ insert into treballador values ('111111111B' , 'secret' , 'Marc' ,'2001/01/20' ,
 insert into treballador values ('111111111C' , 'secret' , 'Liu' ,'2001/05/20' , 'Infermeria' , 'ADMIN' , 'actiu');
 insert into treballador values ('111111111D' , 'secret' , 'Eric' ,'2001/04/20' , 'Infermeria' , 'ADMIN' , 'actiu');
 insert into treballador values ('111111111E' , 'secret' , 'Prova' ,'2001/04/20' , 'TCAI' , 'USER' , 'actiu');
+
+-- -------------------------- GUARDIES --------------------------
+
+-- -------------------------------------------------------------- DIA 1 -------------------------------------------------
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 1' , 'Dia' , 'Infermeria' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 1' , 'Nit' , 'Infermeria' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 1' , 'Nit' , 'TCAI' , 5 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 1' , 'Dia' , 'TCAI' , 2 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 2' , 'Dia' , 'Infermeria' , 0 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 2' , 'Nit' , 'Infermeria' , 0 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 2' , 'Dia' , 'TCAI' , 0 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 2' , 'Nit' , 'TCAI' , 0 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 3' , 'Dia' , 'Infermeria' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 3' , 'Nit' , 'Infermeria' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 3' , 'Dia' , 'TCAI' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 3' , 'Nit' , 'TCAI' , 2 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 4' , 'Dia' , 'Infermeria' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 4' , 'Nit' , 'Infermeria' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 4' , 'Dia' , 'TCAI' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Unitat 4' , 'Nit' , 'TCAI' , 1 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Urgencies' , 'Dia' , 'Infermeria' , 4 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Urgencies' , 'Nit' , 'Infermeria' , 3 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Urgencies' , 'Dia' , 'TCAI' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-01' , 'Urgencies' , 'Nit' , 'TCAI' , 1 , 'actiu');
+
+-- --------------------------------------------------------------- DIA 8 -----------------------------------------------------------------
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 1' , 'Dia' , 'Infermeria' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 1' , 'Nit' , 'Infermeria' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 1' , 'Nit' , 'TCAI' , 5 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 1' , 'Dia' , 'TCAI' , 2 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 2' , 'Dia' , 'Infermeria' , 0 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 2' , 'Nit' , 'Infermeria' , 0 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 2' , 'Dia' , 'TCAI' , 0 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 2' , 'Nit' , 'TCAI' , 0 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 3' , 'Dia' , 'Infermeria' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 3' , 'Nit' , 'Infermeria' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 3' , 'Dia' , 'TCAI' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 3' , 'Nit' , 'TCAI' , 2 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 4' , 'Dia' , 'Infermeria' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 4' , 'Nit' , 'Infermeria' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 4' , 'Dia' , 'TCAI' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Unitat 4' , 'Nit' , 'TCAI' , 1 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Urgencies' , 'Dia' , 'Infermeria' , 4 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Urgencies' , 'Nit' , 'Infermeria' , 3 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Urgencies' , 'Dia' , 'TCAI' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-08' , 'Urgencies' , 'Nit' , 'TCAI' , 1 , 'actiu');
+
+
+-- ----------------------------------------------------------------- DIA 15 -------------------------------------------------------------------
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 1' , 'Dia' , 'Infermeria' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 1' , 'Nit' , 'Infermeria' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 1' , 'Nit' , 'TCAI' , 5 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 1' , 'Dia' , 'TCAI' , 2 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 2' , 'Dia' , 'Infermeria' , 0 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 2' , 'Nit' , 'Infermeria' , 0 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 2' , 'Dia' , 'TCAI' , 0 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 2' , 'Nit' , 'TCAI' , 0 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 3' , 'Dia' , 'Infermeria' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 3' , 'Nit' , 'Infermeria' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 3' , 'Dia' , 'TCAI' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 3' , 'Nit' , 'TCAI' , 2 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 4' , 'Dia' , 'Infermeria' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 4' , 'Nit' , 'Infermeria' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 4' , 'Dia' , 'TCAI' , 2 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Unitat 4' , 'Nit' , 'TCAI' , 1 , 'actiu');
+
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Urgencies' , 'Dia' , 'Infermeria' , 4 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Urgencies' , 'Nit' , 'Infermeria' , 3 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Urgencies' , 'Dia' , 'TCAI' , 1 , 'actiu');
+insert into guardies (data_guardia , unitat , torn , categoria , places , estat) values ('2023-01-15' , 'Urgencies' , 'Nit' , 'TCAI' , 1 , 'actiu');
+
+-- -------------------------------- GUARDIES PER TREBALLADOR ------------------------------------------------------------
+
+insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat) values ( '111111111A' , 1 ,'apuntat' ,  'actiu' );
+insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat) values ( '111111111B' , 2 ,'apuntat' ,  'actiu' );
+insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat) values ( '111111111C' , 3 ,'apuntat' ,  'actiu' );
+insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat) values ( '111111111D' , 5 ,'apuntat' ,  'actiu' );
