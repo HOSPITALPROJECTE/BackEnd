@@ -92,7 +92,7 @@ const getGuardiesTreballador = (async (req, res) => {
 
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
     const DNI = req.query.dni;
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' order by g.data_guardia";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' order by g.data_guardia";
     connection.query(sql, (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir guardes per treballador')
@@ -112,7 +112,7 @@ const getAgendaTreballador = (async (req, res) => {
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
     const DATA = req.query.data;
     const DNI = req.body.dni;
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"'";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"'";
     connection.query(sql, (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir guardes per treballador')
@@ -133,7 +133,7 @@ const getHistorialTreballador = (async (req, res) => {
     const DNI = req.query.dni;
     const DATA = req.query.data;
 
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' and g.data_guardia < '"+DATA+"' order by g.unitat";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' and g.data_guardia < '"+DATA+"' order by g.unitat";
     connection.query(sql, (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir guardes per treballador')
