@@ -135,10 +135,14 @@ const getHistorialTreballador = (async (req, res) => {
 
     let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' and g.data_guardia < '"+DATA+"' order by g.unitat";
     connection.query(sql, (err, result) => {
-        let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' and g.data_guardia < '"+DATA+"' order by g.unitat";
-            if (err) {
-                res.status(400).send('Error al obternir guardes per treballador')
-            }
+        if (err) {
+            res.status(400).send('Error al obternir guardes per treballador')
+        }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
+        res.status(200).send({
+            "resultat": { "dades": result }
+        });
     })
 });
 
