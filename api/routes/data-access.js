@@ -14,9 +14,9 @@ router.get('/getHistorialTreballador' , db_access.getHistorialTreballador)
 router.get('/getTorns' , db_access.getTorns)
 router.get('/getUnitats' , db_access.getUnitats)
 router.get('/getFestius' , db_access.getFestius)
-router.post('/updateFestiu', db_access.updateFestiu) 
 router.post('/insertFestiu', db_access.insertFestiu) 
 router.post('/guardiesperdata' , db_access.getGuardiesMesAny)
+router.post('/savePlantilla' , db_access.savePlantilla)
 
 
 

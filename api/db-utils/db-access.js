@@ -87,7 +87,7 @@ const getFestius = (async (req, res) => {
 });
 
 const getGuardiesTreballador = (async (req, res) => {
-    const DADES_GuardiesTreballador = 'gx.id, gx.estat_guardia, gx.estat';
+    const DADES_GuardiesTreballador = 'gx.id_guardia, gx.estat_guardia, gx.estat';
     const DADES_Guardia = ',g.id, g.data_guardia, g.unitat, g.torn, g.categoria';
 
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
@@ -106,7 +106,7 @@ const getGuardiesTreballador = (async (req, res) => {
 });
 
 const getAgendaTreballador = (async (req, res) => {
-    const DADES_GuardiesTreballador = 'gx.id, gx.estat_guardia, gx.estat';
+    const DADES_GuardiesTreballador = 'gx.id_guardia, gx.estat_guardia, gx.estat';
     const DADES_Guardia = ',g.id, g.data_guardia, g.unitat, g.torn, g.categoria';
 
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
@@ -126,7 +126,7 @@ const getAgendaTreballador = (async (req, res) => {
 });
 
 const getHistorialTreballador = (async (req, res) => {
-    const DADES_GuardiesTreballador = 'gx.id, gx.estat_guardia, gx.estat';
+    const DADES_GuardiesTreballador = 'gx.id_guardia, gx.estat_guardia, gx.estat';
     const DADES_Guardia = ',g.id, g.data_guardia, g.unitat, g.torn, g.categoria';
 
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
@@ -160,14 +160,6 @@ const getUnitats = (async (req, res) => {
     })
 });
 
-const updateFestiu = (async (req, res) => {
-    let sql = `UPDATE festius SET estat = ? WHERE dia = ?`;
-    connection.query(sql,[req.body.status,req.body.dia], (error, results, fields) => {
-      if (error) throw error;
-      res.send({"d":req.body.status});
-    });
-});
-
 const insertFestiu = (async (req, res) => {
     try {
         let sql = `INSERT into festius(dia, estat) VALUES (?, ?)`;
@@ -187,6 +179,29 @@ const insertFestiu = (async (req, res) => {
         });
     } catch (error) {
         console.log(error);
+        res.status(500).send({ error: "Ha ocurrido un error al insertar el festiu" });
+    }
+});
+
+const savePlantilla = (async (req, res) => {
+    try {
+        let plantilla = req.body;
+        let sql = `INSERT into plantilla_guardia(unitat, torn, categoria, places, estat) VALUES (?, ?,?,?,?)`;
+        connection.query(sql,[plantilla.unitat,plantilla.torn, plantilla.categoria, plantilla.places, 'actiu'], (error, results, fields) => {
+        if (error) {
+            if(error.code === 'ER_DUP_ENTRY'){
+                let updateSql = `UPDATE plantilla_guardia SET estat = ?, places = ? WHERE unitat = ? and torn = ? and categoria = ?`;
+                connection.query(updateSql, ['actiu', plantilla.places, plantilla.unitat, plantilla.torn, plantilla.categoria ], (error, results) => {
+                    if (error) throw error;
+                    res.send({"message": "El valor del campo estat ha sido actualizado"});
+                });
+            } 
+            else {
+                throw error;
+            }
+        }
+        });
+    } catch (error) {
         res.status(500).send({ error: "Ha ocurrido un error al insertar el festiu" });
     }
 });
@@ -222,8 +237,8 @@ module.exports = {
     getUnitats,
     getHistorialTreballador,
     getFestius,
-    updateFestiu, 
-    insertFestiu
+    insertFestiu,
+    savePlantilla
  };
 
 

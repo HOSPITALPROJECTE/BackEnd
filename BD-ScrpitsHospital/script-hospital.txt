@@ -8,6 +8,7 @@ drop table if exists unitat;
 drop table if exists torn;
 drop table if exists categoria;
 drop table if exists festius;
+drop view if exists guardiesTreballadorData;
 
 create table if not exists unitat(
     nom					varchar(20)		primary key,
@@ -35,6 +36,7 @@ create table if not exists plantilla_guardia(
     categoria			varchar(15)		not null,
     places				int 			not null,
     estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
+    primary key (unitat,torn,categoria),
     foreign key (unitat) references unitat(nom),
     foreign key (torn) references torn(nom),
     foreign key (categoria) references categoria(nom)
@@ -70,11 +72,11 @@ create table if not exists treballador (
 
 
 create table if not exists guardies_x_treballador (
-	id					int				primary key auto_increment,
     dni_treballador		varchar(10)		not null,
     id_guardia			int(100)		not null,
     estat_guardia		varchar(20)		check (estat_guardia in ('assignat', 'apuntat')),
     estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
+    primary key (dni_treballador, id_guardia),
     foreign key (dni_treballador) references treballador(dni)
 );
 
