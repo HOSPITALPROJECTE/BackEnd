@@ -13,7 +13,7 @@ const login = (async (req, res) => {
     res.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
 
-    connection.query("select dni , categoria , rol from treballador where nom = ? and password = ? and estat = 'actiu';", [req.body.nom, req.body.password], (err, result) => {
+    connection.query("select dni,rol,categoria from treballador where nom = ? and password = ? and estat = 'actiu'", [req.body.nom, req.body.password], (err, result) => {
         if (err) {
             res.status(400).send("Error al obtenir usuari");
         }
@@ -22,7 +22,8 @@ const login = (async (req, res) => {
         else {
             let dataObject = {
                 dni: result[0].dni,
-                categoria: result[0].categoria
+                categoria: result[0].categoria,
+                rol:result[0].rol
             }
             token.generateAccessToken(dataObject);
             token.generateRefreshToken(dataObject);
