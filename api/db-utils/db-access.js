@@ -222,6 +222,30 @@ const getGuardiesMesAny = (async (req, res) => {
     })
 });
 
+const createGuardies = (async (req, res) => {
+    let plantilles = []
+    let dates = req.body;
+
+    connection.query("SELECT * FROM plantilla_guardia where estat = 'actiu'", (err, result) => {
+        plantilles = result;
+
+        dates.forEach(data => {
+            plantilles.forEach(plantilla => {
+                console.log(data)
+                console.log(plantilla)
+                console.log('-----');
+                try{
+                    let sql = 'INSERT INTO guardies(data_guardia, unitat, torn, categoria, places, estat) VALUES(?,?,?,?,?,?)';
+                    connection.query(sql,[data, plantilla.unitat, plantilla.torn, plantilla.categoria, plantilla.places, 'actiu' ], (err, resultat) => {
+                        
+                    });
+                }catch(err){}
+            });
+        })
+
+    });
+});
+
 
 
 module.exports = { 
@@ -238,7 +262,8 @@ module.exports = {
     getHistorialTreballador,
     getFestius,
     insertFestiu,
-    savePlantilla
+    savePlantilla,
+    createGuardies
  };
 
 

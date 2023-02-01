@@ -17,6 +17,7 @@ router.get('/getFestius' , db_access.getFestius)
 router.post('/insertFestiu', db_access.insertFestiu) 
 router.post('/guardiesperdata' , db_access.getGuardiesMesAny)
 router.post('/savePlantilla' , db_access.savePlantilla)
+router.post('/createGuardies' , db_access.createGuardies)
 
 
 
