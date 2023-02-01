@@ -230,18 +230,18 @@ const createGuardies = (async (req, res) => {
 
         dates.forEach(data => {
             plantilles.forEach(plantilla => {
-                console.log(data)
-                console.log(plantilla)
-                console.log('-----');
                 try{
                     let sql = 'INSERT INTO guardies(data_guardia, unitat, torn, categoria, places, estat) VALUES(?,?,?,?,?,?)';
                     connection.query(sql,[data, plantilla.unitat, plantilla.torn, plantilla.categoria, plantilla.places, 'actiu' ], (err, resultat) => {
                         
                     });
-                }catch(err){}
+                }catch(err){
+                }
             });
         })
-
+        res.status(200).send({
+            "resultat": { "dades": 'correct' }
+        });
     });
 });
 
