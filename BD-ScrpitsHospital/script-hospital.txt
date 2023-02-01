@@ -51,6 +51,7 @@ create table if not exists guardies(
     categoria			varchar(15)		not null,
     places				int				not null,
     estat 				varchar(15)		check (estat in ('actiu' , 'eliminat')),
+    UNIQUE (data_guardia, unitat, torn, categoria),
     foreign key (unitat) references unitat(nom),
     foreign key (torn) references torn(nom),
     foreign key (categoria) references categoria(nom)
