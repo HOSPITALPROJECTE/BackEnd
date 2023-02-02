@@ -207,9 +207,10 @@ const savePlantilla = (async (req, res) => {
 });
 
 
-const getGuardiesMesAny = (async (req, res) => {
+const getGuardiesData = (async (req,res) => {
 
-    connection.query("SELECT * FROM hospital.guardies where data_guardia between ? and ? order by data_guardia asc;", [req.query.primer_dia , req.query.ultim_dia], (err, result) => {
+    connection.query("select * from guardiesMesInscripcions where data_guardia = ? order by unitat asc;", [req.body.data] ,(err, result) => {
+
         if (err) {
             res.status(400).send('Error al obternir guardies per data error : ' + err)
         }
@@ -219,7 +220,8 @@ const getGuardiesMesAny = (async (req, res) => {
             "resultat": { "dades": result }
         });
     })
-});
+
+})
 
 const createGuardies = (async (req, res) => {
     let plantilles = []
@@ -247,10 +249,10 @@ const createGuardies = (async (req, res) => {
 
 
 
-module.exports = { 
+module.exports = {
+    getGuardiesData, 
     getPlantilla, 
     getTreballadors,
-    getGuardiesMesAny,
     getUnitats, 
     getTreballador,
     getCategories, 

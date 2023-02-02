@@ -54,7 +54,7 @@ const apuntarse = (async (req, res) => {
     )
 })
 
-const getEstatGuardies = (async (req, res, next) => {
+const getEstatDies = (async (req, res, next) => {
 
     res.header('Access-Control-Allow-Origin: *');
     res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
@@ -63,11 +63,11 @@ const getEstatGuardies = (async (req, res, next) => {
 
     let rangMes = obtenirRangMes(req.body.data)
    
-    connection.query("select distinct data_guardia , estat_guardia from guardiesTreballadorData where dni_treballador = ? and data_guardia between ? and ?",
+    connection.query("select distinct id_guardia , data_guardia , estat_guardia from guardiesTreballadorData where dni_treballador = ? and data_guardia between ? and ?",
         [req.token.dni , rangMes.primer_dia , rangMes.ultim_dia],
         (err, result) => {
             if (err) {
-                res.status(401).send("Error al apuntar-se");
+                res.status(401).send("Error al obtenir guardies amb estat");
             }
             console.log(req.token.dni)
             console.log(rangMes.primer_dia)
@@ -90,6 +90,26 @@ const obtenirRangMes= (dataRequest) =>{
     return { primer_dia: primerDiaMes, ultim_dia: ultimDiaMes };
 };
 
+const getCategoriaTreballador = (async (req, res, next) => {
+
+    res.header('Access-Control-Allow-Origin: *');
+    res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+    res.header('Content-Type', 'application/json');
+
+    console.log(req.token.dni)
+
+    connection.query("select categoria from treballador where dni = ?", [req.token.dni],
+        (err, result) => {
+            if (err) {
+                res.status(401).send("Error al obtenir categoria de treballador");
+            }
+            res.status(200).send({resultat : result})
+        }
+    )
+
+})
+
 const validateToken = (async (req, res, next) => {
 
     const accessToken = req.headers["authorization"].split(" ")[1];
@@ -108,5 +128,6 @@ module.exports = {
     login,
     apuntarse,
     validateToken,
-    getEstatGuardies
+    getEstatDies,
+    getCategoriaTreballador
 }
