@@ -17,6 +17,7 @@ const getPlantilla = (async (req, res) => {
         })
 });
 
+
 const getTreballador = (async (req, res) => {
     const DNI = req.query.dni;
     connection.query("select * from treballador where dni = '"+DNI+"' and estat = 'actiu'", (err, result) => {
@@ -31,6 +32,21 @@ const getTreballador = (async (req, res) => {
     })
 });
 
+
+const getGuardies = (async (req, res) => {
+    connection.query("select * from guardies where estat = 'actiu'", (err, result) => {
+        if (err) {
+            res.status(400).send('Error al obtenir guardies')
+        }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
+        res.status(200).send({
+            "resultat": { "dades": result }
+        })
+    })
+});
+
+
 const getTreballadors = (async (req, res) => {
     
     connection.query("select * from treballador where estat != 'eliminat' " , (err, result) => {
@@ -43,7 +59,8 @@ const getTreballadors = (async (req, res) => {
             "resultat": { "dades": result }
         })
     })
-})
+});
+
 
 const getCategories = (async (req, res) => {
     connection.query("select nom from categoria where estat != 'eliminat'", (err, result) => {
@@ -57,6 +74,7 @@ const getCategories = (async (req, res) => {
         });
     })
 });
+
 
 const getTorns = (async (req, res) => {
     connection.query("select nom from torn where estat != 'eliminat'", (err, result) => {
@@ -72,7 +90,6 @@ const getTorns = (async (req, res) => {
 });
 
 
-
 const getFestius = (async (req, res) => {
     connection.query("select * from festius where estat != 'eliminat'", (err, result) => {
         if (err) {
@@ -86,13 +103,14 @@ const getFestius = (async (req, res) => {
     })
 });
 
+
 const getGuardiesTreballador = (async (req, res) => {
-    const DADES_GuardiesTreballador = 'gx.id_guardia, gx.estat_guardia, gx.estat';
+    const DADES_GuardiesTreballador = 'gx.id, gx.estat_guardia, gx.estat';
     const DADES_Guardia = ',g.id, g.data_guardia, g.unitat, g.torn, g.categoria';
 
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
     const DNI = req.query.dni;
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' order by g.data_guardia";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' order by g.data_guardia";
     connection.query(sql, (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir guardes per treballador')
@@ -105,14 +123,15 @@ const getGuardiesTreballador = (async (req, res) => {
     })
 });
 
+
 const getAgendaTreballador = (async (req, res) => {
-    const DADES_GuardiesTreballador = 'gx.id_guardia, gx.estat_guardia, gx.estat';
+    const DADES_GuardiesTreballador = 'gx.id, gx.estat_guardia, gx.estat';
     const DADES_Guardia = ',g.id, g.data_guardia, g.unitat, g.torn, g.categoria';
 
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
     const DATA = req.query.data;
     const DNI = req.body.dni;
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"'";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"'";
     connection.query(sql, (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir guardes per treballador')
@@ -125,24 +144,21 @@ const getAgendaTreballador = (async (req, res) => {
     })
 });
 
+
 const getHistorialTreballador = (async (req, res) => {
-    const DADES_GuardiesTreballador = 'gx.id_guardia, gx.estat_guardia, gx.estat';
+    const DADES_GuardiesTreballador = 'gx.id, gx.estat_guardia, gx.estat';
     const DADES_Guardia = ',g.id, g.data_guardia, g.unitat, g.torn, g.categoria';
 
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
     const DNI = req.query.dni;
     const DATA = req.query.data;
 
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' and g.data_guardia < '"+DATA+"' order by g.unitat";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' and g.data_guardia < '"+DATA+"' order by g.unitat";
     connection.query(sql, (err, result) => {
-        if (err) {
-            res.status(400).send('Error al obternir guardes per treballador')
-        }
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
-        res.status(200).send({
-            "resultat": { "dades": result }
-        });
+        let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' and g.data_guardia < '"+DATA+"' order by g.unitat";
+            if (err) {
+                res.status(400).send('Error al obternir guardes per treballador')
+            }
     })
 });
 
@@ -159,6 +175,16 @@ const getUnitats = (async (req, res) => {
         });
     })
 });
+
+
+const updateFestiu = (async (req, res) => {
+    let sql = `UPDATE festius SET estat = ? WHERE dia = ?`;
+    connection.query(sql,[req.body.status,req.body.dia], (error, results, fields) => {
+      if (error) throw error;
+      res.send({"d":req.body.status});
+    });
+});
+
 
 const insertFestiu = (async (req, res) => {
     try {
@@ -183,33 +209,11 @@ const insertFestiu = (async (req, res) => {
     }
 });
 
-const savePlantilla = (async (req, res) => {
-    try {
-        let plantilla = req.body;
-        let sql = `INSERT into plantilla_guardia(unitat, torn, categoria, places, estat) VALUES (?, ?,?,?,?)`;
-        connection.query(sql,[plantilla.unitat,plantilla.torn, plantilla.categoria, plantilla.places, 'actiu'], (error, results, fields) => {
-        if (error) {
-            if(error.code === 'ER_DUP_ENTRY'){
-                let updateSql = `UPDATE plantilla_guardia SET estat = ?, places = ? WHERE unitat = ? and torn = ? and categoria = ?`;
-                connection.query(updateSql, ['actiu', plantilla.places, plantilla.unitat, plantilla.torn, plantilla.categoria ], (error, results) => {
-                    if (error) throw error;
-                    res.send({"message": "El valor del campo estat ha sido actualizado"});
-                });
-            } 
-            else {
-                throw error;
-            }
-        }
-        });
-    } catch (error) {
-        res.status(500).send({ error: "Ha ocurrido un error al insertar el festiu" });
-    }
-});
-
 
 const getGuardiesMesAny = (async (req, res) => {
 
-    connection.query("SELECT * FROM hospital.guardies where data_guardia between ? and ? order by data_guardia asc;", [req.query.primer_dia , req.query.ultim_dia], (err, result) => {
+    connection.query("SELECT * FROM hospital.guardies where data_guardia between ? and ? order by data_guardia asc;", [req.body.primer_dia , req.body.ultim_dia], (err, result) => {
+        console.log(req.body.primer_dia)
         if (err) {
             res.status(400).send('Error al obternir guardies per data error : ' + err)
         }
@@ -220,31 +224,6 @@ const getGuardiesMesAny = (async (req, res) => {
         });
     })
 });
-
-const createGuardies = (async (req, res) => {
-    let plantilles = []
-    let dates = req.body;
-
-    connection.query("SELECT * FROM plantilla_guardia where estat = 'actiu'", (err, result) => {
-        plantilles = result;
-
-        dates.forEach(data => {
-            plantilles.forEach(plantilla => {
-                try{
-                    let sql = 'INSERT INTO guardies(data_guardia, unitat, torn, categoria, places, estat) VALUES(?,?,?,?,?,?)';
-                    connection.query(sql,[data, plantilla.unitat, plantilla.torn, plantilla.categoria, plantilla.places, 'actiu' ], (err, resultat) => {
-                        
-                    });
-                }catch(err){
-                }
-            });
-        })
-        res.status(200).send({
-            "resultat": { "dades": 'correct' }
-        });
-    });
-});
-
 
 
 module.exports = { 
@@ -260,9 +239,9 @@ module.exports = {
     getUnitats,
     getHistorialTreballador,
     getFestius,
+    updateFestiu, 
     insertFestiu,
-    savePlantilla,
-    createGuardies
+    getGuardies
  };
 
 
