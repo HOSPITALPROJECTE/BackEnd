@@ -278,6 +278,13 @@ const getGuardiesMesAny = (async (req, res) => {
         });
     })
 });
+const updateFestiu = (async (req, res) => {
+    let sql = `UPDATE festius SET estat = ? WHERE dia = ?`;
+    connection.query(sql,[req.body.status,req.body.dia], (error, results, fields) => {
+      if (error) throw error;
+      res.send({"d":req.body.status});
+    });
+});
 
 
 module.exports = {
@@ -297,7 +304,8 @@ module.exports = {
     insertFestiu,
     savePlantilla,
     createGuardies,
-    getTreballadorsGuardia
+    getTreballadorsGuardia,
+    updateFestiu
  };
 
 
