@@ -100,3 +100,6 @@ select gt.dni_treballador , gt.id_guardia , gt.estat_guardia , g.data_guardia
 from guardies_x_treballador gt , guardies g 
 where gt.id_guardia = g.id
 
+create view guardiesMesInscripcions as
+select g.* , (select count(*) from guardies_x_treballador gt where g.id = gt.id_guardia) as inscripcions 
+from guardies g 
