@@ -13,7 +13,7 @@ class Token {
     }
 
     generateAccessToken(userDni) {
-        this.accessToken = jwt.sign(userDni, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "6m"}) 
+        this.accessToken = jwt.sign(userDni, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "1m"}) 
     }
 
     generateRefreshToken(userDni) {
