@@ -95,7 +95,26 @@ const getGuardiesTreballador = (async (req, res) => {
     let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' order by g.data_guardia";
     connection.query(sql, (err, result) => {
         if (err) {
-            res.status(400).send('Error al obternir guardes per treballador')
+            res.status(400).send('Error al obternir guardies per treballador')
+        }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
+        res.status(200).send({
+            "resultat": { "dades": result }
+        });
+    })
+});
+
+const getTreballadorsGuardia = (async (req, res) => {
+    const DADES_GuardiesTreballador = 'gx.id_guardia, gx.estat_guardia, gx.estat,gx.dni_treballador,gx.nom';
+    const DADES_Guardia = ',g.id, g.unitat, g.categoria, g.torn';
+
+    const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
+    const id = req.query.id_guardia;
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat != 'eliminat' and gx.id_guardia ='"+id+"' order by g.data_guardia";
+    connection.query(sql, (err, result) => {
+        if (err) {
+            res.status(400).send('Error al obternir guardies per treballador')
         }
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
@@ -115,7 +134,7 @@ const getAgendaTreballador = (async (req, res) => {
     let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat = 'actiu' and gx.dni_treballador ='"+DNI+"'";
     connection.query(sql, (err, result) => {
         if (err) {
-            res.status(400).send('Error al obternir guardes per treballador')
+            res.status(400).send('Error al obternir guardies per treballador')
         }
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
@@ -136,7 +155,7 @@ const getHistorialTreballador = (async (req, res) => {
     let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat != 'eliminat' and gx.dni_treballador ='"+DNI+"' and g.data_guardia < '"+DATA+"' order by g.unitat";
     connection.query(sql, (err, result) => {
         if (err) {
-            res.status(400).send('Error al obternir guardes per treballador')
+            res.status(400).send('Error al obternir guardies per treballador')
         }
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
@@ -207,9 +226,10 @@ const savePlantilla = (async (req, res) => {
 });
 
 
-const getGuardiesMesAny = (async (req, res) => {
+const getGuardiesData = (async (req,res) => {
 
-    connection.query("SELECT * FROM hospital.guardies where data_guardia between ? and ? order by data_guardia asc;", [req.query.primer_dia , req.query.ultim_dia], (err, result) => {
+    connection.query("select * from guardiesMesInscripcions where data_guardia = ? order by unitat asc;", [req.body.data] ,(err, result) => {
+
         if (err) {
             res.status(400).send('Error al obternir guardies per data error : ' + err)
         }
@@ -219,7 +239,8 @@ const getGuardiesMesAny = (async (req, res) => {
             "resultat": { "dades": result }
         });
     })
-});
+
+})
 
 const createGuardies = (async (req, res) => {
     let plantilles = []
@@ -247,10 +268,10 @@ const createGuardies = (async (req, res) => {
 
 
 
-module.exports = { 
+module.exports = {
+    getGuardiesData, 
     getPlantilla, 
     getTreballadors,
-    getGuardiesMesAny,
     getUnitats, 
     getTreballador,
     getCategories, 
@@ -262,7 +283,8 @@ module.exports = {
     getFestius,
     insertFestiu,
     savePlantilla,
-    createGuardies
+    createGuardies,
+    getTreballadorsGuardia
  };
 
 
