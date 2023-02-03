@@ -14,7 +14,22 @@ app.use(express.json());
 app.use('/api/user', userRoutes);
 app.use('/api/data-access' , dataRoutes);
 
-
+app.use((req, res, next) => {
+    const token = req.header('Authorization');
+  
+    if (!token) {
+      return res.status(401).json({ msg: 'No token, authorization denied' });
+    }
+  
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = decoded.user;
+      next();
+    } catch (err) {
+      res.status(401).json({ msg: 'Token is not valid' });
+    }
+  });
+  
 const port = process.env.TOKEN_SERVER_PORT;
 
 app.listen(port, () =>{
