@@ -265,10 +265,23 @@ const createGuardies = (async (req, res) => {
         });
     });
 });
+const getGuardiesMesAny = (async (req, res) => {
 
+    connection.query("SELECT * FROM hospital.guardies where data_guardia between ? and ? order by data_guardia asc;", [req.query.primer_dia , req.query.ultim_dia], (err, result) => {
+        if (err) {
+            res.status(400).send('Error al obternir guardies per data error : ' + err)
+        }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods','GET, POST ,PUT,OPTIONS');
+        res.status(200).send({
+            "resultat": { "dades": result }
+        });
+    })
+});
 
 
 module.exports = {
+    getGuardiesMesAny,
     getGuardiesData, 
     getPlantilla, 
     getTreballadors,
