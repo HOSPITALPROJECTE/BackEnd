@@ -26,6 +26,7 @@ router.post('/desAssignarEstatGuardia',db_access.desAssignarEstatGuardia);
 router.post('/assignarEstatGuardia',db_access.assignarEstatGuardia);
 router.post('/insertFestiu', db_access.insertFestiu) 
 router.post('/guardiesperdata' , db_access.getGuardiesData)
+router.post('/refreshToken' , db_access.refreshToken)
 
 
 

@@ -303,6 +303,35 @@ const desAssignarEstatGuardia =(async(req,res) =>{
     }
 });
 
+
+const refreshToken = (async (req, res) => {
+    console.log('refresh')
+    const refreshToken = req.body.refreshToken;
+    if (!refreshToken) {
+        console.log('ERROR')
+        return res.status(401).send({ message: 'No refresh token provided' });
+    }
+    try {
+        console.log('AAAAAAA')
+        console.log(refreshToken)
+        console.log(jwt.verify(refreshToken, 'SECRET'))
+        const decoded = jwt.verify(refreshToken, 'SECRET');
+        console.log('-----')
+        const userId = decoded.userId;
+        console.log('BBBBB')
+        const user = users.find(u => u.id === userId);
+        console.log('cccc')
+        if (!user) {
+            return res.status(401).send({ message: 'Invalid refresh token' });
+        }
+        const newAccessToken = jwt.sign({ userId: user.id }, 'SECRET', { expiresIn: '15min' });
+        return res.send({ accessToken: newAccessToken });
+    } catch (err) {
+        return res.status(401).send({ message: 'Invalid refresh token' });
+    }
+  });
+
+
 module.exports = {
     getGuardiesMesAny,
     getGuardiesData, 
@@ -322,7 +351,8 @@ module.exports = {
     createGuardies,
     getTreballadorsGuardia,
     assignarEstatGuardia,
-    desAssignarEstatGuardia
+    desAssignarEstatGuardia,
+    refreshToken
  };
 
 
