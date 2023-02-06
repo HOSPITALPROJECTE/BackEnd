@@ -22,9 +22,8 @@ router.post('/guardiesperdata' , db_access.getGuardiesMesAny)
 router.post('/savePlantilla' , db_access.savePlantilla)
 router.post('/createGuardies' , db_access.createGuardies)
 
-
-
-router.post('/updateFestiu', db_access.updateFestiu) 
+router.post('/desAssignarEstatGuardia',db_access.desAssignarEstatGuardia);
+router.post('/assignarEstatGuardia',db_access.assignarEstatGuardia);
 router.post('/insertFestiu', db_access.insertFestiu) 
 router.post('/guardiesperdata' , db_access.getGuardiesData)
 

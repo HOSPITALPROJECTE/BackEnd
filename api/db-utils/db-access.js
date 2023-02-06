@@ -111,7 +111,7 @@ const getTreballadorsGuardia = (async (req, res) => {
 
     const DADES = DADES_GuardiesTreballador+" "+DADES_Guardia;
     const id = req.query.id_guardia;
-    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat != 'eliminat' and gx.id_guardia ='"+id+"' order by g.data_guardia";
+    let sql = "select "+ DADES +" from guardies_x_treballador as gx JOIN guardies as g on gx.id_guardia = g.id where gx.estat != 'eliminat' and gx.id_guardia ='"+id+"' order by gx.estat_guardia='assignat' desc";
     connection.query(sql, (err, result) => {
         if (err) {
             res.status(400).send('Error al obternir guardies per treballador')
@@ -278,14 +278,30 @@ const getGuardiesMesAny = (async (req, res) => {
         });
     })
 });
-const updateFestiu = (async (req, res) => {
-    let sql = `UPDATE festius SET estat = ? WHERE dia = ?`;
-    connection.query(sql,[req.body.status,req.body.dia], (error, results, fields) => {
-      if (error) throw error;
-      res.send({"d":req.body.status});
-    });
+
+const assignarEstatGuardia =(async(req,res) =>{
+    try{
+    connection.query("UPDATE guardies_x_treballador SET estat_guardia ='assignat' WHERE dni_treballador=?;", [req.query.dni_treballador], (err, result) => {
+      if (err){
+      res.status(400).send("Error al canviar l'estat de les guardies: " + err)
+    }})}
+    catch (error) {
+        console.log(error);
+        res.status(500).send({ error: "Error al canviar l'estat" });
+    }
 });
 
+const desAssignarEstatGuardia =(async(req,res) =>{
+    try{
+    connection.query("UPDATE guardies_x_treballador SET estat_guardia ='apuntat' WHERE dni_treballador=?;", [req.query.dni_treballador], (err, result) => {
+      if (err){
+      res.status(400).send("Error al canviar l'estat de les guardies: " + err)
+    }})}
+    catch (error) {
+        console.log(error);
+        res.status(500).send({ error: "Error al canviar l'estat" });
+    }
+});
 
 module.exports = {
     getGuardiesMesAny,
@@ -305,7 +321,8 @@ module.exports = {
     savePlantilla,
     createGuardies,
     getTreballadorsGuardia,
-    updateFestiu
+    assignarEstatGuardia,
+    desAssignarEstatGuardia
  };
 
 
