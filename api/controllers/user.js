@@ -63,7 +63,7 @@ const getEstatDies = (async (req, res, next) => {
 
     let rangMes = obtenirRangMes(req.body.data)
    
-    connection.query("select distinct id_guardia , data_guardia , estat_guardia from guardiesTreballadorData where dni_treballador = ? and data_guardia between ? and ?",
+    connection.query("select distinct id_guardia , data_guardia , estat_guardia , unitat from guardiesTreballadorData where dni_treballador = ? and data_guardia between ? and ?",
         [req.token.dni , rangMes.primer_dia , rangMes.ultim_dia],
         (err, result) => {
             if (err) {

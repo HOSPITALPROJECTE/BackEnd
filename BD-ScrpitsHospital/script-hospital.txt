@@ -96,7 +96,7 @@ alter table historial auto_increment = 1;
 -- --------------------------------------------- VISTES -------------------------------
 
 create view guardiesTreballadorData as 
-select gt.dni_treballador , gt.id_guardia , gt.estat_guardia , g.data_guardia 
+select gt.dni_treballador , gt.id_guardia , gt.estat_guardia , g.data_guardia , g.unitat 
 from guardies_x_treballador gt , guardies g 
 where gt.id_guardia = g.id
 
