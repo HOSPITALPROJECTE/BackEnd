@@ -1,0 +1,24 @@
+insert into treballador values ('123456789A' , 'secret' , 'Andrea' ,'2001/04/20' , 'Infermeria' , 'USER' , 'actiu');
+/*************************
+	guardies historial
+ *************************/
+INSERT INTO guardies
+(id,data_guardia,unitat,torn,categoria,places,estat)
+VALUES(3000,'2020-01-01','Unitat 1','Dia','Infermeria',3,'actiu')
+,(3001,'2020-01-02','Unitat 1','Nit','Infermeria',2,'actiu')
+,(3002,'2020-01-03','Unitat 1','Dia','Infermeria',2,'actiu')
+,(3003,'2020-01-04','Unitat 2','Nit','Infermeria',2,'actiu')
+,(3004,'2020-01-05','Unitat 3','Dia','Infermeria',3,'actiu');
+
+insert into guardies_x_treballador
+(dni_treballador, id_guardia, estat_guardia, estat)
+ values ('123456789A',3000,'apuntat','actiu')
+ ,('123456789A',3001,'assignat','actiu')
+ ,('123456789A',3002,'assignat','actiu')
+ ,('123456789A',3003,'assignat','actiu')
+ ,('123456789A',3004,'apuntat','actiu')
+,('111111111E',41,'assignat','actiu')
+ ,('111111111E',3187,'apuntat','actiu')
+ ,('111111111E',3209,'apuntat','actiu')
+ ,('111111111E',3229,'apuntat','actiu')
+ ,('111111111E',3388,'apuntat','actiu');
