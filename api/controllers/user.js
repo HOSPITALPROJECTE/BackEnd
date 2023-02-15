@@ -43,12 +43,31 @@ const apuntarse = (async (req, res) => {
 
 
     connection.query("insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat) values (? , ? , 'apuntat' , 'actiu')",
-        [req.body.dni, req.body.id_guardia],
+        [req.token.dni, req.body.id_guardia],
         (err, result) => {
             if (err) {
                 res.status(401).send("Error al apuntar-se");
             }
 
+            res.status(200).send("Correcte!!")
+        }
+    )
+})
+
+const cancelar = (async (req,res) =>{
+    
+    res.header('Access-Control-Allow-Origin: *');
+    res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
+
+    connection.query("update guardies_x_treballador set estat = 'eliminat' where dni_treballador = ? and id_guardia = ?",
+        [req.token.dni, req.body.id_guardia],
+        (err, result) => {
+            if (err) {
+                res.status(401).send("Error al apuntar-se");
+            }
+            connection
             res.status(200).send("Correcte!!")
         }
     )
@@ -140,6 +159,7 @@ const validateToken = (async (req, res, next) => {
 module.exports = {
     login,
     apuntarse,
+    cancelar,
     getGuardiesTreballadorPerData,
     validateToken,
     getEstatDies,
