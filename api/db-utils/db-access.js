@@ -304,6 +304,20 @@ const desAssignarEstatGuardia =(async(req,res) =>{
 });
 
 
+const getGuardiesTreballadorPerData = (async(req,res) =>{
+    connection.query("select distinct unitat , estat_guardia from guardiesTreballadorData where dni_treballador =? and data_guardia = ?", [req.body.dni , req.body.data], (err, result) => {
+        if (err) {
+            res.status(400).send('Error al obtenir guardies treballador per data error : ' + err)
+        }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods','GET, POST ,PUT,OPTIONS');
+        res.status(200).send({
+            "resultat": { "dades": result }
+        });
+    })
+})
+
+
 const refreshToken = (async (req, res) => {
     console.log('refresh')
     const refreshToken = req.body.refreshToken;
@@ -334,7 +348,7 @@ const refreshToken = (async (req, res) => {
 
 module.exports = {
     getGuardiesMesAny,
-    getGuardiesData, 
+    getGuardiesData,
     getPlantilla, 
     getTreballadors,
     getUnitats, 

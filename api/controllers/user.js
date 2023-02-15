@@ -110,6 +110,19 @@ const getCategoriaTreballador = (async (req, res, next) => {
 
 })
 
+const getGuardiesTreballadorPerData = (async(req,res) =>{
+    connection.query("select distinct unitat , estat_guardia from guardiesTreballadorData where dni_treballador =? and data_guardia = ?", [req.token.dni , req.body.data], (err, result) => {
+        if (err) {
+            res.status(400).send('Error al obtenir guardies treballador per data error : ' + err)
+        }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods','GET, POST ,PUT,OPTIONS');
+        res.status(200).send({
+            "resultat": { "dades": result }
+        });
+    })
+})
+
 const validateToken = (async (req, res, next) => {
 
     const accessToken = req.headers["authorization"].split(" ")[1];
@@ -127,6 +140,7 @@ const validateToken = (async (req, res, next) => {
 module.exports = {
     login,
     apuntarse,
+    getGuardiesTreballadorPerData,
     validateToken,
     getEstatDies,
     getCategoriaTreballador
