@@ -1,4 +1,6 @@
 insert into treballador values ('123456789A' , 'secret' , 'Andrea' ,'2001/04/20' , 'Infermeria' , 'USER' , 'actiu');
+insert into treballador values ('987654321A' , 'secret' , 'Admin' ,'2002/07/10' , 'TCAI' , 'ADMIN' , 'actiu');
+
 /*************************
 	guardies historial
  *************************/
@@ -11,14 +13,27 @@ VALUES(3000,'2020-01-01','Unitat 1','Dia','Infermeria',3,'actiu')
 ,(3004,'2020-01-05','Unitat 3','Dia','Infermeria',3,'actiu');
 
 insert into guardies_x_treballador
-(dni_treballador, id_guardia, estat_guardia, estat)
- values ('123456789A',3000,'apuntat','actiu')
- ,('123456789A',3001,'assignat','actiu')
- ,('123456789A',3002,'assignat','actiu')
- ,('123456789A',3003,'assignat','actiu')
- ,('123456789A',3004,'apuntat','actiu')
-,('111111111E',41,'assignat','actiu')
- ,('111111111E',3187,'apuntat','actiu')
- ,('111111111E',3209,'apuntat','actiu')
- ,('111111111E',3229,'apuntat','actiu')
- ,('111111111E',3388,'apuntat','actiu');
+(dni_treballador, id_guardia, estat_guardia, nom, estat)
+ values ('123456789A',3000,'apuntat', 'Andrea', 'actiu')
+ ,('123456789A',3001,'assignat', 'Andrea','actiu')
+ ,('123456789A',3002,'assignat', 'Andrea','actiu')
+ ,('123456789A',3003,'assignat', 'Andrea', 'actiu')
+ ,('123456789A',3004,'apuntat', 'Andrea', 'actiu')
+,('111111111E',41,'assignat', 'Xavi', 'actiu')
+ ,('111111111E',3187,'apuntat', 'Xavi', 'actiu')
+ ,('123456789A',3187,'apuntat', 'Andrea', 'actiu')
+ ,('111111111E',3209,'apuntat', 'Xavi', 'actiu')
+ ,('123456789A',3209,'apuntat', 'Andrea', 'actiu')
+,('111111111E',3229,'apuntat', 'Xavi', 'actiu')
+ ,('123456789A',3229,'apuntat', 'Andrea', 'actiu')
+,('111111111E',3388,'apuntat', 'Xavi', 'actiu');
+ ,('123456789A',3388,'apuntat', 'Andrea', 'actiu');
+
+ALTER TABLE guardies_x_treballador
+ADD nom varchar(50);
+
+
+En el dia 05-03-2023, Unitat 1, Nit, Infermeria, 1 plaça hi ha dades 
+En el dia 12-03-2023, Unitat 2, Dia, Infermeria, 0 places hi ha dades 
+En el dia 19-03-2023, Unitat 2, Dia, Infermeria, 0 places hi ha dades 
+En el dia 14-05-2023, Unitat 1, Nit, TCAI, 2 places hi ha dades 

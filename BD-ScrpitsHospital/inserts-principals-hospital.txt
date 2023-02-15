@@ -102,7 +102,7 @@ insert into treballador values ('111111111A' , 'secret' , 'Oussama' ,'2001/09/26
 insert into treballador values ('111111111B' , 'secret' , 'Marc' ,'2001/01/20' , 'Infermeria' , 'ADMIN' , 'actiu');
 insert into treballador values ('111111111C' , 'secret' , 'Liu' ,'2001/05/20' , 'Infermeria' , 'ADMIN' , 'actiu');
 insert into treballador values ('111111111D' , 'secret' , 'Eric' ,'2001/04/20' , 'Infermeria' , 'ADMIN' , 'actiu');
-insert into treballador values ('111111111E' , 'secret' , 'Prova' ,'2001/04/20' , 'TCAI' , 'USER' , 'actiu');
+insert into treballador values ('111111111E' , 'secret' , 'Xavi' ,'2001/04/20' , 'TCAI' , 'USER' , 'actiu');
 
 -- -------------------------- GUARDIES --------------------------
 
@@ -190,7 +190,7 @@ insert into guardies (data_guardia , unitat , torn , categoria , places , estat)
 
 -- -------------------------------- GUARDIES PER TREBALLADOR ------------------------------------------------------------
 
-insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat) values ( '111111111A' , 1 ,'apuntat' ,  'actiu' );
-insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat) values ( '111111111B' , 2 ,'apuntat' ,  'actiu' );
-insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat) values ( '111111111C' , 3 ,'apuntat' ,  'actiu' );
-insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat) values ( '111111111D' , 5 ,'apuntat' ,  'actiu' );
+insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , nom, estat) values ( '111111111A' , 1 ,'apuntat' , 'Oussama', 'actiu' );
+insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , nom, estat) values ( '111111111B' , 2 ,'apuntat' , 'Marc', 'actiu' );
+insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , nom, estat) values ( '111111111C' , 3 ,'apuntat' , 'Liu', 'actiu' );
+insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , nom, estat) values ( '111111111D' , 5 ,'apuntat' , 'Eric', 'actiu' );
