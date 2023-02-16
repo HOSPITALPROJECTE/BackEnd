@@ -13,7 +13,7 @@ const login = (async (req, res) => {
     res.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
 
-    connection.query("select dni,rol,categoria from treballador where nom = ? and password = ? and estat = 'actiu'", [req.body.nom, req.body.password], (err, result) => {
+    connection.query("select dni,rol,nom,categoria from treballador where nom = ? and password = ? and estat = 'actiu'", [req.body.nom, req.body.password], (err, result) => {
         if (err) {
             res.status(400).send("Error al obtenir usuari");
         }
@@ -23,7 +23,8 @@ const login = (async (req, res) => {
             let dataObject = {
                 dni: result[0].dni,
                 categoria: result[0].categoria,
-                rol:result[0].rol
+                rol:result[0].rol,
+                nom:result[0].nom
             }
             token.generateAccessToken(dataObject);
             token.generateRefreshToken(dataObject);
@@ -42,8 +43,8 @@ const apuntarse = (async (req, res) => {
     res.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
 
-    connection.query("insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat) values (? , ? , 'apuntat' , 'actiu')",
-        [req.token.dni, req.body.id_guardia],
+    connection.query("insert into guardies_x_treballador (dni_treballador , id_guardia  , estat_guardia , estat, nom) values (? , ? , 'apuntat' , 'actiu',?)",
+        [req.token.dni, req.body.id_guardia, req.token.nom],
         (err, result) => {
             if (err) {
                 res.status(401).send("Error al apuntar-se");
@@ -52,6 +53,7 @@ const apuntarse = (async (req, res) => {
             res.status(200).send("Correcte!!")
         }
     )
+
 })
 
 const cancelar = (async (req,res) =>{
@@ -67,7 +69,6 @@ const cancelar = (async (req,res) =>{
             if (err) {
                 res.status(401).send("Error al apuntar-se");
             }
-            connection
             res.status(200).send("Correcte!!")
         }
     )
@@ -91,7 +92,7 @@ const getEstatDies = (async (req, res, next) => {
             console.log(req.token.dni)
             console.log(rangMes.primer_dia)
             console.log(rangMes.ultim_dia)
-            res.status(200).send({guardies : result})
+            res.status(200).send({guardies: result})
         }
     )
 
